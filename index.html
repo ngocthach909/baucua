@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Bầu Cua</title>
+  <style>
+    body { font-family: Arial; text-align: center; background: #f8f8f8; }
+    .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 10px; margin: 30px auto; }
+    .cell { border: 2px solid #333; padding: 10px; background: #fff; cursor: pointer; }
+    .result { margin-top: 20px; font-size: 24px; }
+    button { padding: 10px 20px; font-size: 18px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Game Bầu Cua</h1>
+  <div class="board" id="board"></div>
+  <button onclick="roll()">Lắc!</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    const items = ["🦀", "🦐", "🐟", "🦌", "🍐", "🐓"]; // Cua, Tôm, Cá, Nai, Bầu, Gà
+    const board = document.getElementById("board");
+    const result = document.getElementById("result");
+
+    function renderBoard() {
+      board.innerHTML = "";
+      items.forEach(item => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.textContent = item;
+        cell.onclick = () => alert("Bạn chọn: " + item);
+        board.appendChild(cell);
+      });
+    }
+
+    function roll() {
+      const dice = [randItem(), randItem(), randItem()];
+      result.innerHTML = `Kết quả: ${dice.join(" ")}`;
+    }
+
+    function randItem() {
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
+    renderBoard();
+  </script>
+</body>
+</html>
